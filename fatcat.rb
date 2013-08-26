@@ -1,8 +1,14 @@
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/base'
+require 'sinatra/contrib/all'
 require 'sass'
+require 'sinatra/activerecord'
+require 'json'
 
 set :public_folder, 'public'
+
+
 class SassEngine < Sinatra::Base
   set :views,   File.dirname(__FILE__)    + '/assets/sass'
 
@@ -21,5 +27,15 @@ end
 use SassEngine
 get '/' do
   redirect 'index.html'
+end
+
+
+#api
+get '/api/v1/posts' do
+  Post.all.to_json
+end
+
+class Post < ActiveRecord::Base
+
 end
 
