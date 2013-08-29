@@ -5,7 +5,7 @@ define (require) ->
   class PostModel extends Backbone.Model
 
     defaults:
-      rent: 5000
+      rent: 5001
 
   return PostModel
 
