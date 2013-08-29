@@ -1,0 +1,20 @@
+paths:
+  backbone: 'backbone'
+  underscore: 'underscore'
+  marionette: 'backbone.marionette'
+  handlebars: 'Handlebars'
+shim:
+  underscore:
+    exports: '_'
+  backbone:
+    deps: ["underscore", "jquery"]
+    exports: "Backbone"
+
+  marionette:
+    deps: ["backbone"]
+    exports: "Marionette"
+
+  handlebars:
+    exports: "Handlebars"
+
+
