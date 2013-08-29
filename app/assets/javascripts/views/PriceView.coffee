@@ -6,6 +6,8 @@ define (require) ->
 
   class PriceView extends Marionette.ItemView
     template: Handlebars.compile(priceTpl)
+    modelEvents:
+      "change": "render"
 
 
   return PriceView

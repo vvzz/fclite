@@ -3,9 +3,8 @@ define (require) ->
   Backbone = require 'backbone'
 
   class PostModel extends Backbone.Model
+    urlRoot: '/api/v1/posts'
 
-    defaults:
-      rent: 5001
 
   return PostModel
 

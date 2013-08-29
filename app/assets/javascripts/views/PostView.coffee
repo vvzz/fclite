@@ -14,6 +14,8 @@ define (require) ->
     onRender: ->
       post = new PostModel
       priceView = new PriceView(model: post)
+      post.id = 1
+      post.fetch()
       @price.show(priceView)
 
 
