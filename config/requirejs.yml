@@ -17,4 +17,6 @@ shim:
   handlebars:
     exports: "Handlebars"
 
+  moment:
+    exports: "moment"
 

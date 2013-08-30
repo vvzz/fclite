@@ -6,9 +6,9 @@ class Post < ActiveRecord::Base
            # :foreign_key => 'post_id',
            # :class_name => 'Asset'
 
-  # has_many :availabilities,
-           # :foreign_key => 'post_id',
-           # :class_name => 'Availability'
+  has_many :availabilities,
+           :foreign_key => 'post_id',
+           :class_name => 'Availability'
 
   # accepts_nested_attributes_for :assets, :availabilities
 end
