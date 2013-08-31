@@ -30,10 +30,4 @@ ActiveRecord::Schema.define(version: 20130830001152) do
     t.boolean "last"
   end
 
-  create_table "tests", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 end

@@ -1,3 +1,5 @@
 json.description @post.description
 json.monthly @post.monthly
-json.availabilities @post.availabilities, :start, :end, :slotSize
+json.security @post.security
+json.last @post.last
+json.timeslots @post.calculateTimeslots, :start, :end, :free

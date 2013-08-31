@@ -2,6 +2,7 @@ define (require) ->
   $ = require 'jquery'
   Marionette = require 'marionette'
   Handlebars = require 'handlebars'
+  SlotPickerView = require 'views/SlotPickerView'
   moment = require 'moment'
   scheduleTpl = require 'text!templates/schedule.html'
   dayTpl = require 'text!templates/day.html'
@@ -11,6 +12,8 @@ define (require) ->
     template: Handlebars.compile(scheduleTpl)
     modelEvents:
       "change": "renderTimeSlots"
+    events:
+      "click .getAppts": "showApptSelector"
 
     makeDay: (i) ->
       moment.lang 'en',
@@ -38,29 +41,34 @@ define (require) ->
     renderTimeSlots: ->
       slots = {}
       daysEl = @$el.find("#days > div.day")
-      _.each @model.get('availabilities'), (availability) =>
-        offset = moment(availability.end).diff(new Date(), 'days') + 1
-        startHour = moment(availability.start).hours()
-
-        numberOfAppointments = moment(availability.end).diff(moment(availability.start), 'minutes') / availability.slotSize
+      _.each @model.get('timeslots'), (timeslot) =>
+        offset = moment(timeslot.start).diff(new Date(), 'days')
+        startHour = moment(timeslot.start).hours()
 
         slots[offset] ?= {}
         slots[offset].offset = offset
         if 0 < startHour < 12
           slots[offset].morning ?= 0
-          slots[offset].morning = slots[offset].morning + numberOfAppointments
+          slots[offset].morning = slots[offset].morning + 1
         else if 12 < startHour < 18
           slots[offset].day ?= 0
-          slots[offset].day= slots[offset].day + numberOfAppointments
+          slots[offset].day= slots[offset].day + 1
         else if 18 < startHour < 24
           slots[offset].evening ?= 0
-          slots[offset].evening = slots[offset].evening+ numberOfAppointments
+          slots[offset].evening = slots[offset].evening + 1
 
 
       _.each slots, (slot) =>
         tpl = Handlebars.compile(slotTpl)
         daysEl.eq(slot.offset).find('.date').append(tpl(slot))
 
+
+    showApptSelector:(e) ->
+      e.preventDefault()
+      slotPickerView = new SlotPickerView
+        top: $(e.target).closest("div.slot").offset().top
+        left: 200
+      $('body').append(slotPickerView.render().el)
 
 
 

@@ -10,5 +10,17 @@ class Post < ActiveRecord::Base
            :foreign_key => 'post_id',
            :class_name => 'Availability'
 
+  def calculateTimeslots
+    availabilities.map do |a|
+      slotSize = (a.slotSize).minutes
+      slots = []
+      iter = a.start
+      while iter < a.end
+        slots.push({:start => iter, :end => iter + slotSize, :free => true})
+        iter += slotSize
+      end
+      slots
+    end.flatten!
+  end
   # accepts_nested_attributes_for :assets, :availabilities
 end
