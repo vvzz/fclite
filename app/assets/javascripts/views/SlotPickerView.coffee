@@ -10,8 +10,8 @@ define (require) ->
     className: "slotPicker"
 
     initialize: (options) ->
-      @$el.offset
-        top: options.top
-        left: options.left
+      # @$el.offset
+        # top: options.top
+        # left: options.left
 
   return SlotPickerView

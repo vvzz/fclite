@@ -1,18 +1,6 @@
-{{#if morning}}
-<div class="slot">
-  <h6><i class="icon-time"></i>Morning</h6>
-  <p><a href="#" class="getAppts">{{ morning }} Available</a></p>
+<div class="span2 offset{{ offset }}">
+  <div class="slot">
+    <h6><i class="icon-time"></i>{{ period }}</h6>
+    <p><a href="#" class="getAppts">{{ count}} Available</a></p>
+  </div>
 </div>
-{{/if}}
-{{#if day}}
-<div class="slot">
-  <h6><i class="icon-time"></i>Day</h6>
-  <p><a href="#" class="getAppts">{{ day}} Available</a></p>
-</div>
-{{/if}}
-{{#if evening}}
-<div class="slot">
-  <h6><i class="icon-time"></i>Evening</h6>
-  <p><a href="#" class="getAppts">{{ evening }} Available</a></p>
-</div>
-{{/if}}

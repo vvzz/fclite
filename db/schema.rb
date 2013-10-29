@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130830001152) do
+ActiveRecord::Schema.define(version: 20131028233154) do
 
   create_table "availabilities", force: true do |t|
     t.datetime "start"
@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 20130830001152) do
     t.float   "monthly"
     t.float   "security"
     t.boolean "last"
+    t.string  "address1"
+    t.string  "address2"
+    t.string  "city"
+    t.string  "postal"
+    t.string  "state"
   end
 
 end

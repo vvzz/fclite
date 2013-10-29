@@ -60,15 +60,31 @@ define (require) ->
 
       _.each slots, (slot) =>
         tpl = Handlebars.compile(slotTpl)
-        daysEl.eq(slot.offset).find('.date').append(tpl(slot))
+        offset = slot.offset * 2
+        if slot.morning
+          @$el.find("#morning").append tpl
+            offset: offset
+            count: slot.morning
+            period: "Morning"
+        if slot.day
+          @$el.find("#day").append tpl
+            offset: offset
+            count: slot.day
+            period: "Day"
+        if slot.evening
+          @$el.find("#evening").append tpl
+            offset: offset
+            count: slot.evening
+            period: "Evening"
 
 
     showApptSelector:(e) ->
       e.preventDefault()
+      parentDiv = $(e.target).closest("div.span2")
+      slots = []
       slotPickerView = new SlotPickerView
-        top: $(e.target).closest("div.slot").offset().top
-        left: 200
-      $('body').append(slotPickerView.render().el)
+        collection: slots
+      parentDiv.after(slotPickerView.render().el)
 
 
 
