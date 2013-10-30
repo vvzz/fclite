@@ -3,6 +3,7 @@ define (require) ->
   Marionette = require 'marionette'
   Handlebars = require 'handlebars'
   SlotPickerView = require 'views/SlotPickerView'
+  SlotCollection = require 'models/SlotCollection'
   moment = require 'moment'
   scheduleTpl = require 'text!templates/schedule.html'
   dayTpl = require 'text!templates/day.html'
@@ -39,51 +40,50 @@ define (require) ->
       @$el.find("#days").append(tpl(day))
 
     renderTimeSlots: ->
-      slots = {}
+      @slots = {}
       daysEl = @$el.find("#days > div.day")
       _.each @model.get('timeslots'), (timeslot) =>
-        offset = moment(timeslot.start).diff(new Date(), 'days')
+        offset = Math.ceil(moment(timeslot.start).diff(new Date(), 'days', true))
         startHour = moment(timeslot.start).hours()
 
-        slots[offset] ?= {}
-        slots[offset].offset = offset
+        @slots[offset] ?= {}
+        @slots[offset].offset = offset
         if 0 < startHour < 12
-          slots[offset].morning ?= 0
-          slots[offset].morning = slots[offset].morning + 1
+          @slots[offset].morning ?= []
+          @slots[offset].morning.push(timeslot)
         else if 12 < startHour < 18
-          slots[offset].day ?= 0
-          slots[offset].day= slots[offset].day + 1
+          @slots[offset].day ?= []
+          @slots[offset].day.push(timeslot)
         else if 18 < startHour < 24
-          slots[offset].evening ?= 0
-          slots[offset].evening = slots[offset].evening + 1
+          @slots[offset].evening ?= []
+          @slots[offset].evening.push(timeslot)
 
 
-      _.each slots, (slot) =>
+      _.each @slots, (slot) =>
         tpl = Handlebars.compile(slotTpl)
         offset = slot.offset * 2
         if slot.morning
           @$el.find("#morning").append tpl
             offset: offset
-            count: slot.morning
+            count: slot.morning.length
             period: "Morning"
         if slot.day
           @$el.find("#day").append tpl
             offset: offset
-            count: slot.day
+            count: slot.day.length
             period: "Day"
         if slot.evening
           @$el.find("#evening").append tpl
             offset: offset
-            count: slot.evening
+            count: slot.evening.length
             period: "Evening"
 
 
     showApptSelector:(e) ->
       e.preventDefault()
       parentDiv = $(e.target).closest("div.span2")
-      slots = []
       slotPickerView = new SlotPickerView
-        collection: slots
+        collection: new SlotCollection(@slots[$(e.target).data('offset')/2][$(e.target).data('period').toLowerCase()])
       parentDiv.after(slotPickerView.render().el)
 
 

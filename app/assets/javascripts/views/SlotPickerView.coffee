@@ -9,9 +9,5 @@ define (require) ->
     tagName: "div"
     className: "slotPicker"
 
-    initialize: (options) ->
-      # @$el.offset
-        # top: options.top
-        # left: options.left
 
   return SlotPickerView
