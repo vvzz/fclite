@@ -10,13 +10,19 @@ class Post < ActiveRecord::Base
            :foreign_key => 'post_id',
            :class_name => 'Availability'
 
+  has_many :appointments,
+           :foreign_key => 'post_id',
+           :class_name => 'Appointment'
+
   def calculateTimeslots
     availabilities.map do |a|
       slotSize = (a.slotSize).minutes
       slots = []
       iter = a.start
+      takenStartTimes = appointments.collect {|a| a.start}
       while iter < a.end
-        slots.push({:start => iter, :end => iter + slotSize, :free => true})
+        free = !takenStartTimes.include?(iter)
+        slots.push({:start => iter, :end => iter + slotSize, :free => free})
         iter += slotSize
       end
       slots

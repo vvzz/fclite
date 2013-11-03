@@ -65,26 +65,30 @@ define (require) ->
         if slot.morning
           @$el.find("#morning").append tpl
             offset: offset
-            count: slot.morning.length
+            count: _.where(slot.morning, {'free': true}).length
             period: "Morning"
         if slot.day
           @$el.find("#day").append tpl
             offset: offset
-            count: slot.day.length
+            count: _.where(slot.day, {'free': true}).length
             period: "Day"
         if slot.evening
           @$el.find("#evening").append tpl
             offset: offset
-            count: slot.evening.length
+            count: _.where(slot.evening, {'free': true}).length
             period: "Evening"
 
 
     showApptSelector:(e) ->
+      e.stopPropagation()
       e.preventDefault()
       parentDiv = $(e.target).closest("div.span2")
       slotPickerView = new SlotPickerView
         collection: new SlotCollection(@slots[$(e.target).data('offset')/2][$(e.target).data('period').toLowerCase()])
-      parentDiv.after(slotPickerView.render().el)
+        offset:
+          top: parentDiv.offset().top
+          left: parentDiv.offset().left + parentDiv.outerWidth()
+      $('body').append(slotPickerView.render().el)
 
 
 

@@ -1,7 +1,9 @@
-<div class="span2">
-  <ul>
-    {{#each items }}
-    <li>{{ start }}</li>
-    {{/each}}
-  </ul>
-</div>
+<ul>
+  {{#each items }}
+    {{#if free}}
+      <li class="appointment"><a href="#">{{ start }}</a></li>
+    {{else}}
+      <li class="busy appointment"><a href="#">{{ start }}</a></li>
+    {{/if}}
+  {{/each}}
+</ul>
