@@ -1,6 +1,6 @@
 paths:
   backbone: 'backbone'
-  underscore: 'underscore'
+  underscore: 'lodash'
   marionette: 'backbone.marionette'
   handlebars: 'Handlebars'
 shim:
