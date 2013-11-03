@@ -8,5 +8,7 @@ define (require) ->
     template: Handlebars.compile(requestApptTpl)
     tagName: "div"
 
+    onShow: (view) ->
+      @$el.modal('show')
 
   return RequestAppointmentView

@@ -7,7 +7,7 @@ define (require) ->
 
     constructor:() ->
       Backbone.Marionette.Region.prototype.constructor.apply(this, arguments)
-      this.on("view:show", @showModal, this)
+      @on("view:show", @showModal, this)
 
     getEl: (selector) ->
       $el = $(selector)
