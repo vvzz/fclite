@@ -46,34 +46,36 @@ define (require) ->
         offset = Math.ceil(moment(timeslot.start).diff(new Date(), 'days', true))
         startHour = moment(timeslot.start).hours()
 
-        @slots[offset] ?= {}
-        @slots[offset].offset = offset
-        if 0 < startHour < 12
-          @slots[offset].morning ?= []
-          @slots[offset].morning.push(timeslot)
-        else if 12 < startHour < 18
-          @slots[offset].day ?= []
-          @slots[offset].day.push(timeslot)
-        else if 18 < startHour < 24
-          @slots[offset].evening ?= []
-          @slots[offset].evening.push(timeslot)
+        if offset >= 0
+          @slots[offset] ?= {}
+          @slots[offset].offset = offset
+          if 0 < startHour < 12
+            @slots[offset].morning ?= []
+            @slots[offset].morning.push(timeslot)
+          else if 12 < startHour < 18
+            @slots[offset].day ?= []
+            @slots[offset].day.push(timeslot)
+          else if 18 < startHour < 24
+            @slots[offset].evening ?= []
+            @slots[offset].evening.push(timeslot)
 
 
       _.each @slots, (slot) =>
         tpl = Handlebars.compile(slotTpl)
-        offset = slot.offset * 2
+        offset = slot.offset
+        el = @$el.find('.day').eq(offset)
         if slot.morning
-          @$el.find("#morning").append tpl
+          el.append tpl
             offset: offset
             count: _.where(slot.morning, {'free': true}).length
             period: "Morning"
         if slot.day
-          @$el.find("#day").append tpl
+          el.append tpl
             offset: offset
             count: _.where(slot.day, {'free': true}).length
             period: "Day"
         if slot.evening
-          @$el.find("#evening").append tpl
+          el.append tpl
             offset: offset
             count: _.where(slot.evening, {'free': true}).length
             period: "Evening"
@@ -82,9 +84,9 @@ define (require) ->
     showApptSelector:(e) ->
       e.stopPropagation()
       e.preventDefault()
-      parentDiv = $(e.target).closest("div.span2")
+      parentDiv = $(e.target).closest("div.slot")
       slotPickerView = new SlotPickerView
-        collection: new SlotCollection(@slots[$(e.target).data('offset')/2][$(e.target).data('period').toLowerCase()])
+        collection: new SlotCollection(@slots[$(e.target).data('offset')][$(e.target).data('period').toLowerCase()])
         offset:
           top: parentDiv.offset().top
           left: parentDiv.offset().left + parentDiv.outerWidth()

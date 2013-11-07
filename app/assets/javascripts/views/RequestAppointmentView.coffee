@@ -7,6 +7,7 @@ define (require) ->
   class RequestAppointmentView extends Marionette.ItemView
     template: Handlebars.compile(requestApptTpl)
     tagName: "div"
+    className: "modal"
 
     onShow: (view) ->
       @$el.modal('show')
