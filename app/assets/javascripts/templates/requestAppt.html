@@ -2,9 +2,30 @@
   <h2>Scheduling your appointment</h2>
 </div>
 <div class="modal-body">
-  <p>With some content in it!</p>
+  <div id="flash"></div>
+  <form class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Your Email</label>
+      <div class="controls">
+        <input type="text" id="inputEmail" placeholder="Email">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Name</label>
+      <div class="controls">
+        <input type="text" id="inputName" placeholder="First Last">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="reCaptcha">Are you human?</label>
+      <div class="controls">
+        <div id="reCaptcha"></div>
+      </div>
+    </div>
+  </form>
 </div>
 <div class="modal-footer">
   <button class="btn" data-dismiss="modal">cancel</button>
-  <button class="btn btn-success">Schedule</button>
+  <button id="schedule" class="btn btn-success">Schedule</button>
 </div>

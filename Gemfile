@@ -34,6 +34,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'recaptcha', :require => 'recaptcha/rails'
+gem 'rest-client'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

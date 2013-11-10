@@ -3,6 +3,7 @@ define (require) ->
   Marionette = require 'marionette'
   Handlebars = require 'handlebars'
   RequestAppointmentView = require 'views/RequestAppointmentView'
+  AppointmentModel = require 'models/Appointment'
   priceTpl = require 'text!templates/slotPicker.html'
 
   class SlotPickerView extends Marionette.ItemView
@@ -27,7 +28,9 @@ define (require) ->
 
     showRequestAppointment: (ev) ->
       ev.preventDefault()
-      reqView = new RequestAppointmentView()
+      reqView = new RequestAppointmentView(
+        model: new AppointmentModel()
+      )
       window.fcr.modal.show(reqView)
 
 
