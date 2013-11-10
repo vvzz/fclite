@@ -8,15 +8,33 @@ define (require) ->
 
   class SlotPickerView extends Marionette.ItemView
     template: Handlebars.compile(priceTpl)
-    tagName: "div"
-    className: "slotPicker"
+    tagName: "li"
+    className: "appointment"
     events:
-      'click .appointment': 'showRequestAppointment'
+      'click a': 'showRequestAppointment'
 
-    initialize: (options)->
+    onBeforeRender: () ->
+      unless @model.get('free') == true
+        @$el.addClass('busy')
+
+    showRequestAppointment: (ev) ->
+      ev.preventDefault()
+      reqView = new RequestAppointmentView(
+        model: new AppointmentModel(
+          start: @model.get('start')
+        )
+      )
+      window.fcr.modal.show(reqView)
+
+  class SlotPickerCollectionView extends Marionette.CollectionView
+    template: Handlebars.compile("<ul></li>")
+    itemView: SlotPickerView
+    tagName: "ul"
+    className: "slotPicker"
+
+    initialize: (options) ->
       _.bindAll(this, 'remove')
       @$el.offset(options.offset)
-
 
     onRender: ->
       $('body').on('click', @remove)
@@ -26,16 +44,4 @@ define (require) ->
         $('body').off('click', @remove)
         @$el.remove()
 
-    showRequestAppointment: (ev) ->
-      ev.preventDefault()
-      reqView = new RequestAppointmentView(
-        model: new AppointmentModel()
-      )
-      window.fcr.modal.show(reqView)
-
-
-
-
-
-
-  return SlotPickerView
+  return SlotPickerCollectionView

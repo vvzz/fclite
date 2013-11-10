@@ -5,7 +5,7 @@ class Appointment < ActiveRecord::Base
   before_create :setupConfirmation
 
   validates :start, :uniqueness => {
-      :scope => :availability_id,
+      :scope => :post_id,
       :message => "This timeslot is already taken"
   }
   validates :email, :format => {

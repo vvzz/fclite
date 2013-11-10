@@ -26,27 +26,24 @@ div.slot
     margin-left: 35px
     a
       color: #aaa
-div.slotPicker
+ul.slotPicker
   background-color: $blank
   border: 1px solid #e1e1e1
   margin-left: 0
   position: absolute
   width: 180px
+  list-style-type: none
+  padding: 0.5em
+  li
+    text-align: center
+    line-height: 2em
+  li:hover
+    background-color: darken($blank, 5%)
 
-  ul
-    list-style-type: none
-    padding: 0.5em
-    margin-left: 0
-    li
-      text-align: center
-      line-height: 2em
-    li:hover
-      background-color: darken($blank, 5%)
-
-    li.busy
-      a
-        color: black
-        text-decoration: line-through
-        cursor: default
+  li.busy
+    a
+      color: black
+      text-decoration: line-through
+      cursor: default
 
 
