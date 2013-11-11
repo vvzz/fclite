@@ -22,7 +22,7 @@ class Post < ActiveRecord::Base
       takenStartTimes = appointments.collect {|a| a.start}
       while iter < a.end
         free = !takenStartTimes.include?(iter)
-        slots.push({:start => iter, :end => iter + slotSize, :free => free})
+        slots.push({:post_id => id, :start => iter, :end => iter + slotSize, :free => free})
         iter += slotSize
       end
       slots

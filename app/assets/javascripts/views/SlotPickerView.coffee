@@ -21,6 +21,7 @@ define (require) ->
       ev.preventDefault()
       reqView = new RequestAppointmentView(
         model: new AppointmentModel(
+          post_id: @model.get('post_id')
           start: @model.get('start')
         )
       )

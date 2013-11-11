@@ -35,14 +35,15 @@ define (require) ->
     scheduleAppointment: (ev) ->
       @model.save(
         email: @$el.find('#inputEmail').val(),
-        post_id: 1,
+        name: @$el.find('#inputName').val(),
         authenticity_token: $("meta[name='csrf-token']").attr('content'),
         recaptcha_challenge_field: @$el.find('#recaptcha_challenge_field').val(),
         recaptcha_response_field: @$el.find('#recaptcha_response_field').val()
       )
 
     appointmentSaved: (model, resp, options) ->
-      this.remove()
+      @$el.modal('hide')
+      @close()
       # @view = new Rent.Views.Visits.ScheduledView(model: model)
       # $("#properties").html(@view.render().el)
       # router.navigate("#/" + @model.get('landlords_campaign_id') + '/scheduled', trigger: false)

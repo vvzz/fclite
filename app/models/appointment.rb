@@ -12,6 +12,10 @@ class Appointment < ActiveRecord::Base
       :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/,
       :message => "Invalid email address"
   }
+  validates :email, :uniqueness => {
+      :scope => :post_id,
+      :message => "You have already scheduled an appointment"
+  }
 
   protected
   def setupConfirmation()

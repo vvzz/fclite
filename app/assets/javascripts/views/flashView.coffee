@@ -16,8 +16,6 @@ define (require) ->
       errors = _.map JSON.parse(xhr.responseText), (value) ->
         "error": value
       @collection = new ErrorCollection(errors)
-      # console.log(error) for key, error of responseObj
-      # @errors = _.values()
       @render()
 
   return FlashView
