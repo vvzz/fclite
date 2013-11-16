@@ -43,6 +43,7 @@ define (require) ->
 
     appointmentSaved: (model, resp, options) ->
       @$el.modal('hide')
+      fcr.vent.trigger("post:fetch");
       @close()
       # @view = new Rent.Views.Visits.ScheduledView(model: model)
       # $("#properties").html(@view.render().el)

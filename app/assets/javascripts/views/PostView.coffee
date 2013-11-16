@@ -15,13 +15,17 @@ define (require) ->
       schedule: "#schedule"
       address: "#address"
 
+    initialize: (options) ->
+      @post = new PostModel
+      fcr.vent.on 'post:fetch', (ev) =>
+        @post.fetch()
+
     onRender: ->
-      post = new PostModel
-      priceView = new PriceView(model: post)
-      scheduleView = new ScheduleView(model: post)
-      addressView = new AddressView(model:post)
-      post.id = 1
-      post.fetch()
+      priceView = new PriceView(model: @post)
+      scheduleView = new ScheduleView(model: @post)
+      addressView = new AddressView(model: @post)
+      @post.id = 1
+      @post.fetch()
       @price.show(priceView)
       @schedule.show(scheduleView)
       @address.show(addressView)

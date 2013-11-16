@@ -40,6 +40,7 @@ define (require) ->
       @$el.find("#days").append(tpl(day))
 
     renderTimeSlots: ->
+      @$el.find(".slot").remove()
       @slots = {}
       daysEl = @$el.find("#days > div.day")
       _.each @model.get('timeslots'), (timeslot) =>
