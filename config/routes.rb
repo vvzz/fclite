@@ -1,9 +1,17 @@
 Fclite::Application.routes.draw do
+  devise_for :users
   get "home/index"
   scope "api/v1" do
     resources :posts do
       resources :appointments
     end
+
+    devise_scope :user do
+      post 'login' => 'sessions#create', :as => 'login'
+      post 'logout' => 'sessions#destroy', :as => 'logout'
+      get 'current_user' => 'sessions#show_current_user', :as => 'show_current_user'
+    end
+
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
