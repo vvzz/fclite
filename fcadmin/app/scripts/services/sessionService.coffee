@@ -31,4 +31,9 @@ angular.module('fcadminApp')
           @currentUser = response.data.user
           if @isAuthenticated()
             $location.path('/')
+
+      logout: () ->
+        $http.post('/api/v1/logout').then () =>
+          @currentUser = null
+
     }

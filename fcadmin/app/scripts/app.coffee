@@ -9,10 +9,12 @@ angular.module('fcadminApp', [
   .config ($routeProvider) ->
     $routeProvider
       .when '/',
-        templateUrl: 'views/main.html'
+        templateUrl: 'views/home.html'
         controller: 'MainCtrl'
       .when '/users/login',
         templateUrl: 'views/login.html'
         controller: 'LoginCtrl'
+      .when '/dashboard',
+        templateUrl: 'views/dashboard.html'
       .otherwise
         redirectTo: '/'

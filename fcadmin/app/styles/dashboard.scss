@@ -1,0 +1,33 @@
+#applicantInfo {
+  #personal {
+    h3 {
+      margin-top: 0;
+    }
+    img {
+      border: 1px solid silver;
+      width: 50px;
+    }
+  }
+}
+
+.dayAppts {
+  table {
+    font-size: smaller;
+    tr:nth-child(4) {
+      border-bottom: 1px solid #eee;
+    }
+    td {
+      height: 10px;
+    }
+  }
+}
+
+.apptHours {
+  table {
+    margin-top: 37px;
+    font-size: smaller;
+    td {
+      height: 40px;
+    }
+  }
+}
