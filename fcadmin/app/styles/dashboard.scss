@@ -1,4 +1,6 @@
 #applicantInfo {
+  height: 400px;
+  overflow-y: scroll;
   #personal {
     h3 {
       margin-top: 0;
@@ -13,11 +15,11 @@
 .dayAppts {
   table {
     font-size: smaller;
-    tr:nth-child(4) {
-      border-bottom: 1px solid #eee;
-    }
     td {
       height: 10px;
+    }
+    td.timeslot {
+      background-color: #EDF393;
     }
   }
 }
