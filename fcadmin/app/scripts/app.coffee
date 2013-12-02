@@ -10,13 +10,33 @@ angular.module('fcadminApp', [
     $stateProvider
       .state 'loggedIn',
         templateUrl: 'views/layout.html'
+        controller: 'LayoutCtrl'
       .state 'loggedIn.dashboard',
-        url: '/dashboard',
+        url: '/dashboard'
         templateUrl: 'views/dashboard.html'
       .state 'loggedIn.post',
-        url: '/post/new',
+        url: '/post/new'
         templateUrl: 'views/post.html'
+      .state 'loggedOut',
+        url: '/users/login'
+        templateUrl: 'views/login.html'
+        controller: 'LoginCtrl'
 
+  .config ($httpProvider) ->
+    interceptor = ($location, $rootScope, $q) ->
+      success = (response) ->
+        response
+
+      error = (response) ->
+        if response.status is 401
+          $rootScope.$broadcast('event:unauthorized')
+          $location.path('/users/login')
+          return response
+
+      return (promise) ->
+        promise.then(success, error)
+
+    $httpProvider.responseInterceptors.push(interceptor)
     # $routeProvider
       # .when '/',
         # templateUrl: 'views/home.html'

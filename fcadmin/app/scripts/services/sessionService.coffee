@@ -2,11 +2,6 @@
 
 angular.module('fcadminApp')
   .factory 'sessionService', ($location, $q, $http) ->
-    # Service logic
-    # ...
-
-
-    # Public API here
     {
       currentUser: null,
       isAuthenticated: ->
@@ -30,7 +25,7 @@ angular.module('fcadminApp')
         .then (response) =>
           @currentUser = response.data.user
           if @isAuthenticated()
-            $location.path('/')
+            $location.path('/dashboard')
 
       logout: () ->
         $http.post('/api/v1/logout').then () =>
