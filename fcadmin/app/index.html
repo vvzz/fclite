@@ -15,7 +15,9 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- <link rel="stylesheet" href="styles/home.css"> -->
         <link rel="stylesheet" href="styles/dashboard.css">
-        <!-- endbuild -->
+        <link rel="stylesheet" href="styles/post.css">
+        <!-- endbuild --> 
+        <link rel="stylesheet" href="bower_components/animate.css/animate.css">
 </head>
   <body ng-app="fcadminApp">
     <!--[if lt IE 7]>
@@ -42,6 +44,7 @@
     </script>
 
     <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
         <!-- build:js scripts/plugins.js -->
@@ -63,8 +66,10 @@
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/restangular/dist/restangular.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -75,6 +80,7 @@
         <script src="scripts/controllers/dashboard.js"></script>
         <script src="scripts/controllers/post.js"></script>
         <script src="scripts/controllers/layout.js"></script>
+        <script src="scripts/services/postService.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -1,6 +1,5 @@
 class Post < ActiveRecord::Base
-  # attr_accessible :end, :start, :description, :available, :monthly, :security, :last
-  #, :assets, :assets_attributes, :availabilities, :availabilities_attributes
+  include ActiveModel::ForbiddenAttributesProtection
 
   # has_many :assets,
            # :foreign_key => 'post_id',

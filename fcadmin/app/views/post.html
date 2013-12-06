@@ -1,35 +1,46 @@
-<div class="container">
-  <form role="form">
-    <div class="row">
-      <h3>New Posting</h3>
-      <div class="col-md-8">
-        <div class="form-group">
-          <label for="postTitle">Post Title</label>
-          <input class="form-control" id="postTitle" type="text" placeholder="Example: Awesome 2BR available now">
+<div class="container" ng-switch="step" ng-animate="'wave'" class="slide-frame">
+  <div ng-switch-when="0">
+    <form role="form">
+      <div class="row">
+        <h3>New Posting</h3>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="postTitle">Post Title</label>
+            <input class="form-control" ng-model="post.title" id="postTitle" type="text" placeholder="Example: Awesome 2BR available now">
+          </div>
+          <div class="form-group">
+            <label for="postBody">Post</label>
+            <textarea class="form-control" id="postBody" ng-model="post.description" cols="30" rows="10"></textarea>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="postBody">Post</label>
-          <textarea class="form-control" id="postBody" cols="30" rows="10"></textarea>
-        </div>
-        <div class="forum-group">
-          <a ui-sref="loggedIn.schedule" class="btn btn-primary">Next: Schedule Availabilities</a>
+        <div class="col-md-4 well">
+          <div class="form-group">
+            <label for="postMonthlyRent">Monthly Rent</label>
+            <input class="form-control" ng-model="post.monthlyRent" id="postMonthlyRent" type="text" placeholder="1200">
+          </div>
+          <div class="form-group">
+            <label for="postMonthlySecurity">Security Deposit</label>
+            <input class="form-control" type="text" id="postMonthlySecurity" placeholder="600">
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox"> Last Month
+            </label>
+          </div>
         </div>
       </div>
-      <div class="col-md-4 well">
-        <div class="form-group">
-          <label for="postMonthlyRent">Monthly Rent</label>
-          <input class="form-control" id="postMonthlyRent" type="text" placeholder="1200">
-        </div>
-        <div class="form-group">
-          <label for="postMonthlySecurity">Security Deposit</label>
-          <input class="form-control" type="text" id="postMonthlySecurity" placeholder="600">
-        </div>
-        <div class="form-group">
-          <label>
-            <input type="checkbox"> Last Month
-          </label>
-        </div>
+    </form>
+  </div>
+  <div ng-switch-when="1">
+    2
+  </div>
+  <div class="row">
+    <div class="cold-md-12">
+      <div class="form-group">
+        <a class="btn btn-default" ng-hide="isFirstStep()" ng-click="handlePrevious()">Back</a>
+        <a class="btn btn-primary" ng-click="handleNext()">{{ nextText }}</a>
       </div>
     </div>
-  </form>
+  </div>
 </div>
+

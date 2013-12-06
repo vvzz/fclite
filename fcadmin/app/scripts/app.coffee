@@ -4,6 +4,8 @@ angular.module('fcadminApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngAnimate',
+  'restangular',
   'ui.router'
 ])
   .config ($stateProvider, $urlRouterProvider) ->
@@ -17,6 +19,7 @@ angular.module('fcadminApp', [
       .state 'loggedIn.post',
         url: '/post/new'
         templateUrl: 'views/post.html'
+        controller: 'PostCtrl'
       .state 'loggedIn.schedule',
         templateUrl: 'views/schedule.html'
       .state 'loggedOut',
@@ -39,16 +42,16 @@ angular.module('fcadminApp', [
         promise.then(success, error)
 
     $httpProvider.responseInterceptors.push(interceptor)
-    # $routeProvider
-      # .when '/',
-        # templateUrl: 'views/home.html'
-        # controller: 'MainCtrl'
-      # .when '/users/login',
-        # templateUrl: 'views/login.html'
-        # controller: 'LoginCtrl'
-      # .when '/dashboard',
-        # templateUrl: 'views/dashboard.html'
-      # .when '/post/new',
-        # templateUrl: 'views/post.html'
-      # .otherwise
-        # redirectTo: '/'
+
+  .config (RestangularProvider) ->
+    RestangularProvider.setBaseUrl('/api/v1')
+    RestangularProvider.setRequestInterceptor (elem, operation, what) ->
+      retElem = elem
+      if operation is 'post' or operation is 'put'
+        wrapper = {}
+        wrapper[what.substring(0, what.length - 1)] = elem
+        retElem = wrapper
+
+      return retElem
+
+
