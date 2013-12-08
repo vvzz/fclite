@@ -5,6 +5,7 @@ angular.module('fcadminApp')
     $scope.step = 0
     $scope.steps = ['Create Post', 'Schedule Availabilities']
     $scope.post = {}
+    $scope.showing = {}
 
     $scope.$watch 'step', ->
       nextStep = $scope.step + 1
@@ -37,5 +38,17 @@ angular.module('fcadminApp')
 
     $scope.submit = ->
       postService.post($scope.post)
+
+    $scope.addShowing = ->
+      console.log $scope.showing
+      if not $scope.post.showings
+        $scope.post.showings = []
+      $scope.post.showings.push(_.clone($scope.showing))
+      $scope.showing = {}
+
+    $scope.removeShowing = (index) ->
+      $scope.post.showings.splice(index, 1)
+
+
 
 

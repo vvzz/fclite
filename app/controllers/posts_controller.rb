@@ -10,13 +10,11 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.save
-    render :status => 200,
-      :json => { :success => true,
-    }
+    render json: @post, status: 201
   end
 
   private
     def post_params
-      params.require(:post).permit(:description)
+      params.require(:post).permit(:description, :monthly, :security)
     end
 end
