@@ -1,0 +1,5 @@
+<div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-default" ng-repeat="day in days" ng-click="pickDay(day)">
+    <input type="radio" value="{{ day.date }}" ng-model="day"> {{ day.label }}
+  </label>
+</div>

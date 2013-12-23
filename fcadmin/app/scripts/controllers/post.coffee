@@ -40,14 +40,17 @@ angular.module('fcadminApp')
       postService.post($scope.post)
 
     $scope.addShowing = ->
-      console.log $scope.showing
-      if not $scope.post.showings
-        $scope.post.showings = []
-      $scope.post.showings.push(_.clone($scope.showing))
+      if not $scope.post.availabilities_attributes
+        $scope.post.availabilities_attributes = []
+      showing = _.clone($scope.showing)
+      showing.start = showing.date + " " + showing.from
+      showing.end = showing.date + " " + showing.to
+      showing.slotSize = 15
+      $scope.post.availabilities_attributes.push(showing)
       $scope.showing = {}
 
     $scope.removeShowing = (index) ->
-      $scope.post.showings.splice(index, 1)
+      $scope.post.availabilities_attributes.splice(index, 1)
 
 
 

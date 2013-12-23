@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   # has_many :assets,
            # :foreign_key => 'post_id',
            # :class_name => 'Asset'
+  belongs_to :user
 
   has_many :availabilities,
            :foreign_key => 'post_id',
@@ -27,5 +28,6 @@ class Post < ActiveRecord::Base
       slots
     end.flatten!
   end
-  # accepts_nested_attributes_for :assets, :availabilities
+
+  accepts_nested_attributes_for :availabilities
 end

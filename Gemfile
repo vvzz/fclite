@@ -37,6 +37,7 @@ end
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'rest-client'
 gem 'devise'
+gem 'paperclip', '~> 3.0'
 
 
 # Use ActiveModel has_secure_password

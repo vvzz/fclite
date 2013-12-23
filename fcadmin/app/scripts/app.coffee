@@ -16,6 +16,7 @@ angular.module('fcadminApp', [
       .state 'loggedIn.dashboard',
         url: '/dashboard'
         templateUrl: 'views/dashboard.html'
+        controller: 'DashboardCtrl'
       .state 'loggedIn.post',
         url: '/post/new'
         templateUrl: 'views/post.html'

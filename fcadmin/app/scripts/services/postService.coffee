@@ -9,4 +9,10 @@ angular.module('fcadminApp')
     {
       post: (post) ->
         basePosts.post(post)
+
+      get: (id) ->
+        basePosts.one(id)
+
+      findAll: ->
+        basePosts.getList()
     }

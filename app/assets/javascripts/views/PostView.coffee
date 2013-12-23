@@ -16,6 +16,7 @@ define (require) ->
       address: "#address"
 
     initialize: (options) ->
+      @id = if options.id then options.id else 1
       @post = new PostModel
       fcr.vent.on 'post:fetch', (ev) =>
         @post.fetch()
@@ -24,7 +25,7 @@ define (require) ->
       priceView = new PriceView(model: @post)
       scheduleView = new ScheduleView(model: @post)
       addressView = new AddressView(model: @post)
-      @post.id = 1
+      @post.id = @id
       @post.fetch()
       @price.show(priceView)
       @schedule.show(scheduleView)
